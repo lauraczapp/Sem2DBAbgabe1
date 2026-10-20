@@ -1,0 +1,44 @@
+TEIL E
+
+1: Wie viele Länder sind in der Datenbank enthalten?
+SELECT COUNT(DISTINCT name) AS "Länderanzahl" FROM country
+
+2: Wie viele Sprachen werden weltweit gesprochen?
+SELECT COUNT(DISTINCT language) AS "Sprachenanzahl" FROM countrylanguage
+
+3: Wie kann man die Namen aller Städte ermitteln, die in Deutschland liegen?
+SELECT name AS "Länder" FROM city
+WHERE countrycode = 'DEU'
+
+4: Wie kann man die Namen und die genaue Anzahl der Einwohner für alle Städte ermitteln, die mehr als 5 Millionen Einwohner haben?
+SELECT name AS "Länder", population FROM city
+WHERE population > 5000000
+
+5: Wie kann man die Namen aller Städte ermitteln, die mit dem Buchstaben "B" beginnen und in den USA liegen?
+SELECT name AS "Länder" FROM city
+WHERE name LIKE 'B%' AND countrycode = 'USA'
+
+6. Für wie viele Länder liegen keine offiziellen Daten zur Lebenserwartung vor?
+SELECT COUNT(name) AS "Anzahl" FROM country
+WHERE lifeexpectancy IS NULL
+
+7. Wie viele Länder haben keine Einwohner?
+SELECT COUNT(name) "Anzahl" FROM country
+WHERE population = 0
+
+8.Nenne je ein Beispiel für eine am wenigsten und eine am häufigsten gesprochene Amtssprache (isofficial):
+SELECT language AS "Sprache", percentage,countrycode FROM countrylanguage
+WHERE isofficial = true
+ORDER BY percentage DESC
+LIMIT 1
+
+SELECT language AS "Sprache", percentage, countrycode FROM countrylanguage
+WHERE isofficial = true
+ORDER BY percentage ASC
+LIMIT 1
+
+
+Code ausführen:
+C:\Users\Laura\IdeaProjects\Datenbanken\src
+javac -cp ".;postgresql-42.7.10.jar" CClient.java
+java -cp ".;postgresql-42.7.10.jar" CClient
